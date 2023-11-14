@@ -5,7 +5,7 @@ pipeline {
    environment {
        // Please update your own registry here
        REGISTRY = 'registry.hub.docker.com'
-       REGISTRY_IMAGE = "$REGISTRY/mpruna/webapp"
+       REGISTRY_IMAGE = "$REGISTRY/gakengabinatsume/webapp"
        DOCKERFILE_PATH = 'Dockerfile'
        docker = '/usr/local/bin/docker'
 
