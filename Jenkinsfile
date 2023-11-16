@@ -1,13 +1,13 @@
 pipeline {
-   // agent any
-   agent  { label 'master' }
+    agent any
+   //agent  { label 'master' }
 
    environment {
        // Please update your own registry here
        REGISTRY = 'registry.hub.docker.com'
-       REGISTRY_IMAGE = "$REGISTRY/gakengabinatsume/webapp"
+       REGISTRY_IMAGE = "$REGISTRY/gabimiron96/webapp"
        DOCKERFILE_PATH = 'Dockerfile'
-       docker = '/usr/local/bin/docker'
+       // docker = '/usr/local/bin/docker'
 
        REGISTRY_USER = credentials('registryUser')
        REGISTRY_PASSWORD = credentials('registryPassword')
@@ -19,13 +19,13 @@ pipeline {
    stages {
        stage('Build') {
            steps {
-               sh '$docker build -t $REGISTRY_IMAGE:$GIT_COMMIT_SHORT-jenkins-$CURRENT_BUILD_NUMBER -f $DOCKERFILE_PATH .'
+               sh 'docker build -t $REGISTRY_IMAGE:$GIT_COMMIT_SHORT-jenkins-$CURRENT_BUILD_NUMBER -f $DOCKERFILE_PATH .'
            }
        }
        stage('Push') {
            steps {
-               sh '$docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD $REGISTRY'
-               sh '$docker push $REGISTRY_IMAGE:$GIT_COMMIT_SHORT-jenkins-$CURRENT_BUILD_NUMBER'
+               sh 'docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD $REGISTRY'
+               sh 'docker push $REGISTRY_IMAGE:$GIT_COMMIT_SHORT-jenkins-$CURRENT_BUILD_NUMBER'
            }
        }
    }
